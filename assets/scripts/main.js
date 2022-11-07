@@ -40,6 +40,9 @@ function getRecipesFromStorage() {
  * @param {Array<Object>} recipes An array of recipes
  */
 function addRecipesToDocument(recipes) {
+   if(!recipes){
+    return;
+  }
   // A10. TODO - Get a reference to the <main> element
   
    let mainA = document.getElementsByTagName('main')[0];
@@ -85,17 +88,16 @@ function initFormHandler() {
   //            submit button is clicked
   
   function formSubmit(){
-    let formdata = new FormData(formA);
+    let fmdata = new FormData(formA);
     let recipeObject = {};
   
     
-    for(const pair of formdata.entries()){
+    for(const pair of fmdata.entries()){
       recipeObject[`${pair[0]}`] = `${pair[1]}`;
     }
 
     let recipeCard = document.createElement('recipe-card');
-    recipeCard.data = formdata;
-    console.log('adding recipes to document')
+    recipeCard.data = fmdata;
     addRecipesToDocument(recipeObject);
 
     console.log('getting recipes from storage')
